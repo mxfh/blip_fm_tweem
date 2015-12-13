@@ -13,7 +13,7 @@ pages = 168
 baseUrl = "http://blip.fm/" + username + "/?page="
 
 for x in range(1, pages):
-  html = scraperwiki.scrape(baseUrl + x)
+  html = scraperwiki.scrape(baseUrl + str(x))
   doc = lxml.html.fromstring(html)
   i = 0
 

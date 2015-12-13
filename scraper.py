@@ -7,12 +7,17 @@ import re
 #
 # # Read in a page
 
+# change accordingly
 username = "diskurs"
+startpage = 1
 pages = 168 
+
+# song per page
+pagelength = 20
 
 baseUrl = "http://blip.fm/" + username + "/?page="
 
-for x in range(1, pages):
+for x in range(startpage, pages):
   html = scraperwiki.scrape(baseUrl + str(x))
   doc = lxml.html.fromstring(html)
   i = 0
@@ -23,7 +28,7 @@ for x in range(1, pages):
     songU = song.encode('utf8')
     print songU
     data = {
-        'row': i,
+        'row': i + pagelength * (x - 1),
         'song': song
     }
     scraperwiki.sqlite.save(unique_keys=['row'], data=data)
